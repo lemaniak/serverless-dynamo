@@ -18,7 +18,7 @@ phases:
       - aws sts get-caller-identity
       - echo deployment started on `date`
       - echo deploying with the serverless framework
-      - sls deploy -v -s prod
+      - sls deploy -v
   post_build:
     commands:
       - echo Deployment completed on `date`           
