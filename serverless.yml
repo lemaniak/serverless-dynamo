@@ -9,10 +9,9 @@ provider:
   memorySize: 128
   timeout: 5
   endpointType: regional
+  environment:
+    NOTES_TABLE: ${self:service}-${self:provider.stage}
   #profile: snap_playground
-
-custom:
- NOTES_TABLE: ${self:service}-${self:provider.stage}
 
 functions:
   hello:
