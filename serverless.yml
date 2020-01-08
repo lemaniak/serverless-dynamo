@@ -1,8 +1,12 @@
 
 service: vicente-serverles-dynamo
 
+package:
+  individually: true
+
 plugins:
   - serverless-offline
+  - serverless-plugin-optimize
 
 custom:
   allowedHeaders:
@@ -25,6 +29,9 @@ provider:
   memorySize: 128
   timeout: 5
   endpointType: regional
+  tracing:
+    apiGateway: true
+    lambda: true
   environment:
     NOTES_TABLE: ${self:service}-${self:provider.stage}
   iamRoleStatements:
