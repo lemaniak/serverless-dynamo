@@ -102,15 +102,13 @@ resources:
         AttributeDefinitions:
           - AttributeName: user_id
             AttributeType: S
-          - AttributeName: timestamp
-            AttributeType: N
           - AttributeName: note_id
             AttributeType: S
         KeySchema:
           - AttributeName: user_id
-            KeyType: HASH
-          - AttributeName: timestamp
-            KeyType: RANGE
+            KeyType: HASH #clave particion
+          - AttributeName: note_id
+            KeyType: RANGE #clave ordenacion
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1

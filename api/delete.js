@@ -13,20 +13,21 @@ const util = require('./util.js');
 exports.handler = async (event) =>{
     try{
 
-        let note_id = event.pathParameters.note_id;
+        let pnote_id = event.pathParameters.note_id;
         let params = {
             TableName: tableName,
             Key:{
-                user_id: util.getUserId(event.headers),
-                note_id: note_id
+                "user_id": util.getUserId(event.headers),
+                "note_id": pnote_id
             }
         };
 
+        console.log(JSON.stringify(params));
         await dynamoDB.delete(params).promise();
 
             return {
                 statusCode: 200,
-                headers: utils.getResponseHeaders()
+                headers: util.getResponseHeaders()
             }
     }catch(err){
         console.log("Error",err);

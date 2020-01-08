@@ -40,7 +40,7 @@ exports.handler = async (event) =>{
 
             return {
                 statusCode: 200,
-                headers: utils.getResponseHeaders(),
+                headers: util.getResponseHeaders(),
                 body: JSON.stringify(data)
             }
     }catch(err){

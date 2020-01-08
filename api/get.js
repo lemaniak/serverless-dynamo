@@ -29,14 +29,14 @@ exports.handler = async (event) =>{
         if(!_.isEmpty(data.items)){
             return {
                 statusCode: 200,
-                headers: utils.getResponseHeaders(),
+                headers: util.getResponseHeaders(),
                 body: JSON.stringify(data.Items[0])
             }
         }
 
             return {
                 statusCode: 404,
-                headers: utils.getResponseHeaders()
+                headers: util.getResponseHeaders()
             }
     }catch(err){
         console.log("Error",err);

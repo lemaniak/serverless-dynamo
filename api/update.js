@@ -30,7 +30,7 @@ exports.handler = async (event) =>{
         }).promise();
             return {
                 statusCode: 200,
-                headers: utils.getResponseHeaders(),
+                headers: util.getResponseHeaders(),
                 body: JSON.stringify(item)
             }
     }catch(err){
