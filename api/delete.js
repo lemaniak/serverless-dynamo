@@ -2,7 +2,7 @@
 *   ROUTE: DELETE /notes/{noteid}
 */
 
-const AWS= require('aws-sdk');
+const AWS= AWSXRay.captureAWS(require('aws-sdk'));
 
 AWS.config.update({region: 'us-east-1'});
 

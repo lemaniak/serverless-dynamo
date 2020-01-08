@@ -2,7 +2,7 @@
 *   ROUTE: POST /note
 */
 
-const AWS= require('aws-sdk');
+const AWS=  AWSXRay.captureAWS(require('aws-sdk'));
 const moment=require('moment');
 const uuidv4=require('uuid/v4');
 AWS.config.update({region: 'us-east-1'});
