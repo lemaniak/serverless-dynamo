@@ -24,7 +24,7 @@ resources:
       Type: AWS::DynamoDB::Table
       DeletionPolicy: Retain
       Properties:
-        TableName: ${self:custom.NOTES_TABLE}
+        TableName: ${self:provider.environment.NOTES_TABLE}
         AttributeDefinitions:
           - AttributeName: user_id
             AttributeType: S
