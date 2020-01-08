@@ -1,6 +1,22 @@
 
 service: vicente-serverles-dynamo
 
+plugins:
+  - serverless-offline
+
+custom:
+  allowedHeaders:
+    - Accept
+    - Content-Type
+    - Content-Length
+    - Authorization
+    - X-Amz-Date
+    - X-Api-Key
+    - X-Amz-Security-Token
+    - X-Amz-User-Agent
+    - app_user_id
+    - app_user_name
+
 provider:
   name: aws
   runtime: nodejs12.x
@@ -11,11 +27,69 @@ provider:
   endpointType: regional
   environment:
     NOTES_TABLE: ${self:service}-${self:provider.stage}
-  #profile: snap_playground
+  iamRoleStatements:
+    - Effect: Allow
+      Action: 
+        - dynamodb;Query
+        - dynamodb:PutItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.NOTES_TABLE}"  
+  profile: snap-portal-admin
 
 functions:
-  hello:
-    handler: handler.hello
+  add-note:
+    handler: api/add.handler
+    description: POST /note
+    events:
+      - http:
+          path: note
+          method: post
+          cors: 
+            origin: '*'
+            headers: ${self:custom.allowedHeaders}
+
+  update-note:
+    handler: api/update.handler
+    description: PATCH /note
+    events:
+      - http:
+          path: note
+          method: patch
+          cors: 
+            origin: '*'
+            headers: ${self:custom.allowedHeaders}
+
+  get-notes:
+    handler: api/getAll.handler
+    description: GET /notes
+    events:
+      - http:
+          path: notes
+          method: get
+          cors: 
+            origin: '*'
+            headers: ${self:custom.allowedHeaders}
+  get-note:
+    handler: api/get.handler
+    description: GET /note/n/{note_id}
+    events:
+      - http:
+          path: note/n/{note_id}
+          method: get
+          cors: 
+            origin: '*'
+            headers: ${self:custom.allowedHeaders}
+  delete-note:
+    handler: api/delete.handler
+    description: DELETE /note/
+    events:
+      - http:
+          path: note/t/{timestamp}
+          method: delete
+          cors: 
+            origin: '*'
+            headers: ${self:custom.allowedHeaders}
+  
 
 
 resources:

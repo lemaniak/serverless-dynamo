@@ -3,7 +3,7 @@
 */
 
 const AWS= require('aws-sdk');
-
+const _=require('underscore');
 AWS.config.update({region: 'us-east-1'});
 
 const dynamoDB = new AWS.DynamoDB.DocumentClient();
@@ -12,10 +12,31 @@ const util = require('./util.js');
 
 exports.handler = async (event) =>{
     try{
+
+        let node_id= decodeURIComponent(event.pathParameters.note_id);
+        let params = {
+            TableName: tableName,
+            IndexName: "note_id-index",
+            KeyConditionExpression: "note_id = :note_id",
+            ExpressionAttributeValues: {
+                ":note_id": note_id
+            },
+            Limit: 1
+        };
+
+        let data = await dynamoDB.query(params).promise();
+
+        if(!_.isEmpty(data.items)){
             return {
                 statusCode: 200,
                 headers: utils.getResponseHeaders(),
-                body: JSON.stringify('')
+                body: JSON.stringify(data.Items[0])
+            }
+        }
+
+            return {
+                statusCode: 404,
+                headers: utils.getResponseHeaders()
             }
     }catch(err){
         console.log("Error",err);
