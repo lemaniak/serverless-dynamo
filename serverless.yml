@@ -74,7 +74,7 @@ functions:
     description: GET /note/{note_id}
     events:
       - http:
-          path: notes/{note_id}
+          path: notes/{note_id}/
           method: get
           cors: 
             origin: '*'
@@ -84,7 +84,7 @@ functions:
     description: DELETE /note/
     events:
       - http:
-          path: notes/{timestamp}
+          path: notes/{note_id}/
           method: delete
           cors: 
             origin: '*'

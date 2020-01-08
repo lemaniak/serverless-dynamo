@@ -13,12 +13,12 @@ const util = require('./util.js');
 exports.handler = async (event) =>{
     try{
 
-        let timestamp = parseInt(event.pathParameters.timestamp);
+        let note_id = parseInt(event.pathParameters.note_id);
         let params = {
             TableName: tableName,
             Key:{
                 user_id: util.getUserId(event.headers),
-                timestamp: timestamp
+                note_id: note_id
             }
         };
 
