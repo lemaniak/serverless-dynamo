@@ -2,6 +2,7 @@
 *   ROUTE: PATCH /note
 */
 
+var AWSXRay = require('aws-xray-sdk');
 const AWS= AWSXRay.captureAWS(require('aws-sdk'));
 const moment = require('moment');
 AWS.config.update({region: 'us-east-1'});

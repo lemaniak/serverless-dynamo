@@ -2,6 +2,7 @@
 *   ROUTE: GET /note/n/
 */
 
+var AWSXRay = require('aws-xray-sdk');
 const AWS= AWSXRay.captureAWS(require('aws-sdk'));
 const _=require('underscore');
 AWS.config.update({region: 'us-east-1'});

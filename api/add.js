@@ -1,7 +1,7 @@
 /*
 *   ROUTE: POST /note
 */
-
+var AWSXRay = require('aws-xray-sdk');
 const AWS=  AWSXRay.captureAWS(require('aws-sdk'));
 const moment=require('moment');
 const uuidv4=require('uuid/v4');
