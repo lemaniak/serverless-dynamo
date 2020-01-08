@@ -42,7 +42,7 @@ functions:
     description: POST /note
     events:
       - http:
-          path: note
+          path: notes
           method: post
           cors: 
             origin: '*'
@@ -53,7 +53,7 @@ functions:
     description: PATCH /note
     events:
       - http:
-          path: note
+          path: notes
           method: patch
           cors: 
             origin: '*'
@@ -74,7 +74,7 @@ functions:
     description: GET /note/{note_id}
     events:
       - http:
-          path: note/{note_id}
+          path: notes/{note_id}
           method: get
           cors: 
             origin: '*'
@@ -84,7 +84,7 @@ functions:
     description: DELETE /note/
     events:
       - http:
-          path: note/{timestamp}
+          path: notes/{timestamp}
           method: delete
           cors: 
             origin: '*'
