@@ -41,7 +41,7 @@ provider:
         - dynamodb:PutItem
         - dynamodb:DeleteItem
       Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.NOTES_TABLE}"  
-  profile: snap-portal-admin
+  #profile: snap-portal-admin
 
 functions:
   add-note:
