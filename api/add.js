@@ -13,6 +13,7 @@ const util = require('./util.js');
 
 exports.handler = async (event) =>{
     try{
+        console.log("EVENT",JSON.stringify(event));
             let item = JSON.parse(event.body).Item;
             item.user_id = util.getUserId(event.headers);
             item.user_name = util.getUserName(event.headers);
