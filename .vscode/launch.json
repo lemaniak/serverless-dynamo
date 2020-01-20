@@ -1,0 +1,30 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Mocha Tests",
+            "program": "${workspaceRoot}/node_modules/mocha/bin/mocha",
+            "args": [
+                "--timeout",
+                "999999",
+                "--colors",
+                "--inspect-brk",
+                "${workspaceFolder}/test/**/*.js"
+            ],
+            "port": 9229,
+            "internalConsoleOptions": "openOnSessionStart"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Program",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/node_modules/.bin/sls",
+            "args": ["invoke","local","-f","add-note","--path","./test/add.json"]
+        }
+    ]
+}

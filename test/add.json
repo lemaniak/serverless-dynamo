@@ -1,0 +1,35 @@
+{
+  "payload": {
+    "item": {
+      "note": "test",
+      "category": "test"
+    }
+  },
+  "x-ray-trace-id": "Root=1-5e23968d-4ef33694503a0294b46498fc",
+  "segment": {
+    "message": "hello",
+    "segment": {
+      "trace_id": "1-5e23968d-95312c400452c528b77ea7e0",
+      "id": "7b21e0031596226d",
+      "start_time": 1579390172.869,
+      "name": "facade",
+      "in_progress": false,
+      "counter": 1,
+      "service": {
+        "runtime": "node",
+        "runtime_version": "v12.13.0",
+        "version": "unknown",
+        "name": "unknown"
+      },
+      "aws": {
+        "xray": {
+          "sdk": "X-Ray for Node.js",
+          "sdk_version": "2.5.0",
+          "package": "aws-xray-sdk"
+        }
+      },
+      "facade": true,
+      "subsegments": []
+    }
+  }
+}

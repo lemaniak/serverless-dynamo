@@ -12,35 +12,34 @@ const tableName = process.env.NOTES_TABLE;
 const util = require('./util.js');
 
 exports.handler = async (event) =>{
-    try{
-            console.log("EVENT",JSON.stringify(event));
-            let item = JSON.parse(event.body).Item;
-            item.user_id = util.getUserId(event.headers);
-            item.user_name = util.getUserName(event.headers);
-            item.note_id = item.user_id+':'+uuidv4();
-            item.timestamp = moment().unix();
-            item.expires = moment().add(90,'days').unix();
+    console.log("EVENT", JSON.stringify(event));
 
-            let data = await dynamoDB.put({
-                TableName: tableName,
-                Item: item
-            }).promise();
-
-            return {
-                statusCode: 200,
-                headers: util.getResponseHeaders(),
-                body: JSON.stringify(item)
-            }
-    }catch(err){
-        console.log("Error",err);
+    try {
+       
+        let item = event.payload;
+        item.note_id = uuidv4();
+        item.user_id = 'user'+uuidv4();
+        item.timestamp = moment().unix();
+        item.expires = moment().add(90,'days').unix();
+    
+        let data = await dynamoDB.put({
+            TableName: tableName,
+            Item: item
+        }).promise();
+    
         return {
-            status: err.statusCode? err.statusCode : 500,
-            headers: util.getResponseHeaders(),
-            body: JSON.stringify({
-                error: err.name? err.name: "Exception",
-                message: err.message? err.message: "Unknown Error"
-            })
-        };
-    }
+            statusCode: 200,
+            headers: {},
+            body: JSON.stringify(data)
+        }
+      } catch(err) {
+        AWSXRay.getSegment().addError(err)
+        console.log("Error",err);
+        throw err
+      } finally {
+        AWSXRay.getSegment().close()
+      }
 
 }
+
+
